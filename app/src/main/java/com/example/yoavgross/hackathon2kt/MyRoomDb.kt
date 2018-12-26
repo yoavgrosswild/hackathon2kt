@@ -30,14 +30,18 @@ abstract class MyRoomDb : RoomDatabase() {
             return Room.databaseBuilder(context, MyRoomDb::class.java, "my_db")
                 .addCallback(object : RoomDatabase.Callback() {
 
-                    override fun onCreate(db: SupportSQLiteDatabase) {
+                    override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
                         scope.launch(Dispatchers.IO) {
                             var item = DbItem("itzko")
                             instance?.myDao()?.insertDataObject(item)
                             item = DbItem("shraga")
                             instance?.myDao()?.insertDataObject(item)
-                            //instance?.myDao()?.insertList(listOf(DbItem("boni"), DbItem("shraga")))
+                            item = DbItem("shosho")
+                            instance?.myDao()?.insertDataObject(item)
+                            item = DbItem("makron")
+                            instance?.myDao()?.insertDataObject(item)
+                            instance?.myDao()?.insertList(listOf(DbItem("boni"), DbItem("sjoqddd")))
                         }
                     }
                 })
