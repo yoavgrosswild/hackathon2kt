@@ -30,11 +30,14 @@ abstract class MyRoomDb : RoomDatabase() {
             return Room.databaseBuilder(context, MyRoomDb::class.java, "my_db")
                 .addCallback(object : RoomDatabase.Callback() {
 
-                    override fun onOpen(db: SupportSQLiteDatabase) {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
-                        val item = DbItem("itzko")
                         scope.launch(Dispatchers.IO) {
-                            instance?.let { it.myDao().insertData(item) }
+                            var item = DbItem("itzko")
+                            instance?.myDao()?.insertDataObject(item)
+                            item = DbItem("shraga")
+                            instance?.myDao()?.insertDataObject(item)
+                            //instance?.myDao()?.insertList(listOf(DbItem("boni"), DbItem("shraga")))
                         }
                     }
                 })

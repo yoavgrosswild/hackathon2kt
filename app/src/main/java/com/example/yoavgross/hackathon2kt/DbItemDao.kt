@@ -9,7 +9,11 @@ import androidx.room.Query
 interface DbItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertData(dbItem: DbItem)
+    fun insertDataObject(dbItem: DbItem)
+
+    @Insert
+    @JvmSuppressWildcards
+    fun insertList(list : List<DbItem>)
 
     @Query("select * from db_items")
     fun getAllItems() : List<DbItem>
