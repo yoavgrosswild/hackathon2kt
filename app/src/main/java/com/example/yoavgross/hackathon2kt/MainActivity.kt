@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    suspend fun getItems(dao: DbItemDao, scope: CoroutineScope) = {
+    suspend fun getItems(dao: DbItemDao, scope: CoroutineScope) = runBlocking{
         withContext(Dispatchers.IO){
             dao.getAllItems()
         }
